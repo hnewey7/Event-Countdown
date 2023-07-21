@@ -8,11 +8,8 @@ Created on Fri Jul 21 23:06:20 2023
 import tkinter as tk
 import datetime 
 
-# Defining application name.
-applicationName = "Event Countdown"
-
 # Countdown GUI window.
-def countdownWindow():
+def countdownWindow(applicationName):
     
     # Function to add new event.
     def addEvent():
@@ -55,10 +52,3 @@ def countdownWindow():
     
     # Starting main loop of GUI.
     countdownWindow.mainloop()
-    
-# Main function.
-def main():
-    
-    countdownWindow()
-        
-main()
