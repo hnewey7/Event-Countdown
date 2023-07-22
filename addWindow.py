@@ -14,6 +14,24 @@ import datetime
 # Function to display add event window.
 def addWindow():
     
+    # Function to format the spin box.
+    def formatSpin(spinboxName):
+        
+        # Get value from spinbox.
+        value = spinboxName.get()
+        
+        # Format the value.
+        formattedValue = "{:02d}".format(int(value))
+        
+        # Setting to formatted value.
+        spinboxName.set(formattedValue)
+        
+        # Setting icursor.
+        spinboxName.icursor(tk.END)
+        
+        # Setting selection.
+        spinboxName.select_range(0, tk.END)
+        
     # Add event function
     def addButton():
            
@@ -94,8 +112,8 @@ def addWindow():
     setNameButton = tk.Button(addWindow, text="Set Name", width=8, command=setName)
     
     # Creating time entry elements.
-    addHoursTime = ttk.Spinbox(addWindow, from_=0, to=23, textvariable=addHours, width=6)
-    addMinsTime = ttk.Spinbox(addWindow, from_=0, to=59, textvariable=addMins, width=6)
+    addHoursTime = ttk.Spinbox(addWindow, from_=0, to=23, textvariable=addHours, width=6, justify="center", command=lambda: formatSpin(addHoursTime))
+    addMinsTime = ttk.Spinbox(addWindow, from_=0, to=59, textvariable=addMins, width=6, justify="center", command=lambda: formatSpin(addMinsTime))
     setTimeButton = tk.Button(addWindow, text="Set Time", width=8, command=setTime)
     
     # Creating add event button.
