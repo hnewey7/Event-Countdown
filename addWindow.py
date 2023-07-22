@@ -8,44 +8,72 @@ Created on Sat Jul 22 10:34:21 2023
 import tkinter as tk
 from tkinter import ttk
 from tkcalendar import Calendar
+import datetime
 
 # Function to display add event window.
 def addWindow():
     
+    def addButton():
+        
+        # Get current date.
+        currentDate = datetime.datetime.now
+        
+        # Get date from calendar.
+        date = calendar.get_date()
+  
     # Creating window with tkinter.
     addWindow = tk.Tk()
     addWindow.title("Add Event")
-    addWindow.geometry("500x220")
+    addWindow.geometry("600x220")
     
     # Defining variables.
+    eventSummary = "Event"
     addHours = tk.IntVar()
     addMins = tk.IntVar()
     
     # Creating calendar element.
     calendar = Calendar(addWindow, borderwidth=0)
     
+    # Creating label element.
+    eventLabel = tk.Label(addWindow, text=eventSummary)
+    
+    # Creating event name elements.
+    eventName = tk.Entry(addWindow, width=19)
+    setName = tk.Button(addWindow, text="Set Name", width=8)
+    
     # Creating time entry elements.
     addHoursTime = ttk.Spinbox(addWindow, from_=0, to=23, textvariable=addHours, width=6)
     addMinsTime = ttk.Spinbox(addWindow, from_=0, to=59, textvariable=addMins, width=6)
+    setTime = tk.Button(addWindow, text="Set Time", width=8)
     
     # Creating add event button.
     addEvent = tk.Button(addWindow, text="Add", width=15)
     
     # Formatting calendar element.
-    calendar.grid(row=1, column=1, rowspan=2)
+    calendar.grid(row=1, column=1, rowspan=4)
+    
+    # Formatting event label
+    eventLabel.grid(row=1, column=2, columnspan=3, sticky="s")
+    
+    # Formatting event name elements.
+    eventName.grid(row=2, column=2, columnspan=2)
+    setName.grid(row=2, column=4, sticky="w")
     
     # Formatting time entry elements.
-    addHoursTime.grid(row=1, column=2, sticky="se", pady=8, padx=5)
-    addMinsTime.grid(row=1, column=3, sticky="sw", pady=8)
+    addHoursTime.grid(row=3, column=2, sticky='ne', padx=5)
+    addMinsTime.grid(row=3, column=3, sticky='nw', padx=5)
+    setTime.grid(row=3, column=4, sticky='nw')
     
     # Formatting add event button.
-    addEvent.grid(row=2, column=2, columnspan=2, sticky="n")
+    addEvent.grid(row=4, column=2, columnspan=3, sticky='n')
     
     # Configuring rows to align vertically.
     addWindow.grid_rowconfigure(0, weight=1)
     addWindow.grid_rowconfigure(1, weight=1)
     addWindow.grid_rowconfigure(2, weight=1)
     addWindow.grid_rowconfigure(3, weight=1)
+    addWindow.grid_rowconfigure(4, weight=1)
+    addWindow.grid_rowconfigure(5, weight=1)
     
     # Configuring columns to align horizontally.
     addWindow.grid_columnconfigure(0, weight=1)
@@ -53,6 +81,7 @@ def addWindow():
     addWindow.grid_columnconfigure(2, weight=1)
     addWindow.grid_columnconfigure(3, weight=1)
     addWindow.grid_columnconfigure(4, weight=1)
+    addWindow.grid_columnconfigure(5, weight=1)
     
     # Lifting window 
     addWindow.lift()
