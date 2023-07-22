@@ -16,23 +16,9 @@ def addWindow():
     
     # Add event function
     def addButton():
-        
-        # Get current date.
-        currentDate = datetime.date.today()
-        
-        # Get date from calendar.
-        date = calendar.selection_get()
-        
-        # If date is in the future.
-        if date > currentDate:
-            
-            return()
-        
-        else:
-            
-            # Error message popup.
-            messagebox.showerror("Previous Date", "Selected event date is in the past. Please select a date in the future.")
            
+        return()
+    
     # Set event name function.
     def setName():
         
@@ -44,6 +30,48 @@ def addWindow():
         
         return()
         
+    # Set event time function.
+    def setTime():
+        
+        try:
+            # Getting time data.
+            hours = int(addHoursTime.get())
+            mins = int(addMinsTime.get())
+        except:
+            # Error message popup.
+            messagebox.showerror("No Time Input", "Please input a valid time.")
+        
+        date = str(calendar.selection_get())
+        
+        # Splitting date into componenets
+        dateComponents = date.split("-")
+        
+        # Individual components
+        year = int(dateComponents[0])
+        month = int(dateComponents[1])
+        day = int(dateComponents[2])
+        
+        # Converting to datetime.
+        Datetime = datetime.datetime(year, month, day, hours, mins)
+        
+        # Get current date.
+        currentDate = datetime.datetime.now()
+        
+        # If date is in the future.
+        if Datetime > currentDate:
+            
+            # Setting event datimetime.
+            eventDatetime = Datetime
+        
+        else:
+            
+            # Error message popup.
+            messagebox.showerror("Previous Date", "Selected event date is in the past. Please select a date in the future.")
+            
+        # Clearing input box.
+        addHoursTime.set("")
+        addMinsTime.set("")
+    
     # Creating window with tkinter.
     addWindow = tk.Tk()
     addWindow.title("Add Event")
@@ -68,7 +96,7 @@ def addWindow():
     # Creating time entry elements.
     addHoursTime = ttk.Spinbox(addWindow, from_=0, to=23, textvariable=addHours, width=6)
     addMinsTime = ttk.Spinbox(addWindow, from_=0, to=59, textvariable=addMins, width=6)
-    setTimeButton = tk.Button(addWindow, text="Set Time", width=8)
+    setTimeButton = tk.Button(addWindow, text="Set Time", width=8, command=setTime)
     
     # Creating add event button.
     addEvent = tk.Button(addWindow, text="Add", width=15, command=addButton)
