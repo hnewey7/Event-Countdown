@@ -7,15 +7,16 @@ Created on Fri Jul 21 23:06:20 2023
 
 import tkinter as tk
 import datetime 
+from addWindow import addWindow
 
 # Countdown GUI window.
-def countdownWindow(applicationName):
+def countdownWindow(applicationName, geometry):
     
     # Function to add new event.
     def addEvent():
         
-        return()
-    
+        addWindow()
+           
     # Function to edit existing events.
     def editEvent():
         
@@ -29,7 +30,7 @@ def countdownWindow(applicationName):
     # Creating window with tkinter.
     countdownWindow = tk.Tk()
     countdownWindow.title(applicationName)
-    countdownWindow.geometry("700x150")
+    countdownWindow.geometry(geometry)
     
     # Creating title for countdown window.
     title = tk.Label(countdownWindow, text=applicationName, pady=5)
