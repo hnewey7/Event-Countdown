@@ -31,7 +31,7 @@ def addWindow():
         
         # Setting selection.
         spinboxName.select_range(0, tk.END)
-        
+            
     # Add event function
     def addButton():
            
@@ -41,12 +41,10 @@ def addWindow():
     def setName():
         
         # Get data from entry.
-        name = eventName.get()
+        data = eventName.get()
         
         # Clear entry
         eventName.delete(0,tk.END)
-        
-        return()
         
     # Set event time function.
     def setTime():
@@ -96,8 +94,9 @@ def addWindow():
     addWindow.geometry("600x220")
     
     # Defining variables.
-    eventSummary = ""
     name = ""
+    eventDatetime = ""
+    eventSummary = ""
     addHours = tk.IntVar()
     addMins = tk.IntVar()
     
@@ -108,7 +107,7 @@ def addWindow():
     eventLabel = tk.Label(addWindow, text=eventSummary)
     
     # Creating event name elements.
-    eventName = tk.Entry(addWindow, width=19)
+    eventName = tk.Entry(addWindow, width=19, justify="center")
     setNameButton = tk.Button(addWindow, text="Set Name", width=8, command=setName)
     
     # Creating time entry elements.
