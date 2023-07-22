@@ -7,6 +7,7 @@ Created on Sat Jul 22 10:34:21 2023
 
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 from tkcalendar import Calendar
 import datetime
 
@@ -16,10 +17,18 @@ def addWindow():
     def addButton():
         
         # Get current date.
-        currentDate = datetime.datetime.now
+        currentDate = datetime.date.today()
         
         # Get date from calendar.
-        date = calendar.get_date()
+        date = calendar.selection_get()
+        
+        if date > currentDate:
+            
+            return()
+        
+        else:
+            
+            messagebox.showerror("Previous Date", "Selected event date is in the past. Please select a date in the future.")
   
     # Creating window with tkinter.
     addWindow = tk.Tk()
@@ -47,7 +56,7 @@ def addWindow():
     setTime = tk.Button(addWindow, text="Set Time", width=8)
     
     # Creating add event button.
-    addEvent = tk.Button(addWindow, text="Add", width=15)
+    addEvent = tk.Button(addWindow, text="Add", width=15, command=addButton)
     
     # Formatting calendar element.
     calendar.grid(row=1, column=1, rowspan=4)
