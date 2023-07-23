@@ -40,26 +40,15 @@ def addWindow():
         # Defining global variables.
         global name
         global eventDatetime
+        global events
         
         # Check if all information has been inputted.
         if len(name)==0 or eventDatetime==None:
             messagebox.showerror("Invalid Event Information", "Please enter all valid event information.")
         
         else:
-            # Get folder path.
-            folderPath = os.path.dirname(os.path.abspath(__file__))
-            
-            # Log file path.
-            logPath = folderPath + "\\logs\\events.txt"
-            
-            # Opening .txt file.
-            log = open(logPath,"w")
-            
-            # Writing event to file.
-            log.write(f'{name} - {eventDatetime}\n')
-            
-            # Closing log file
-            log.close()
+            # Adding new event to events
+            events.append(f'{name} - {eventDatetime}')
             
             # Closing the add window.
             addWindow.destroy()    
