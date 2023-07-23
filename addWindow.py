@@ -11,6 +11,7 @@ from tkinter import messagebox
 from tkcalendar import Calendar
 import pandas
 import datetime
+import os
 
 # Function to display add event window.
 def addWindow():
@@ -35,7 +36,34 @@ def addWindow():
             
     # Add event function
     def addButton():
-           
+        
+        # Defining global variables.
+        global name
+        global eventDatetime
+        
+        # Check if all information has been inputted.
+        if len(name)==0 or eventDatetime==None:
+            messagebox.showerror("Invalid Event Information", "Please enter all valid event information.")
+        
+        else:
+            # Get folder path.
+            folderPath = os.path.dirname(os.path.abspath(__file__))
+            
+            # Log file path.
+            logPath = folderPath + "\\logs\\events.txt"
+            
+            # Opening .txt file.
+            log = open(logPath,"x")
+            
+            # Writing event to file.
+            log.write(f'{name} - {eventDatetime}\n')
+            
+            # Closing log file
+            log.close()
+            
+            # Closing the add window.
+            addWindow.destroy()    
+        
         return()
     
     # Set event name function.
