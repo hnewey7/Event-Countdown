@@ -53,7 +53,7 @@ def addWindow():
             logPath = folderPath + "\\logs\\events.txt"
             
             # Opening .txt file.
-            log = open(logPath,"x")
+            log = open(logPath,"w")
             
             # Writing event to file.
             log.write(f'{name} - {eventDatetime}\n')
@@ -63,8 +63,6 @@ def addWindow():
             
             # Closing the add window.
             addWindow.destroy()    
-        
-        return()
     
     # Set event name function.
     def setName():
