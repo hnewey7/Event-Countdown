@@ -6,7 +6,7 @@ Created on Fri Jul 21 23:06:20 2023
 """
 
 import tkinter as tk
-import datetime 
+import datetime
 from addWindow import addWindow
 
 # Countdown GUI window.

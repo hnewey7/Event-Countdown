@@ -9,6 +9,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 from tkcalendar import Calendar
+import pandas
 import datetime
 
 # Function to display add event window.
@@ -40,14 +41,23 @@ def addWindow():
     # Set event name function.
     def setName():
         
+        # Defining global variables.
+        global name
+        
         # Get data from entry.
-        data = eventName.get()
+        name = eventName.get()
         
         # Clear entry
         eventName.delete(0,tk.END)
         
+        # Update event summary.
+        updateEventSum()
+        
     # Set event time function.
     def setTime():
+        
+        # Defining global variables.
+        global eventDatetime
         
         try:
             # Getting time data.
@@ -87,16 +97,53 @@ def addWindow():
         # Clearing input box.
         addHoursTime.set("")
         addMinsTime.set("")
+        
+        # Update event summary
+        updateEventSum()
     
+    # Function to update event summary.
+    def updateEventSum():
+        
+        # Defining global variables.
+        global name
+        global eventDatetime
+        
+        # Getting current datetime.
+        currentTime = datetime.datetime.now()
+        
+        # Formatting depending on the data available.
+        if len(name)==0 and eventDatetime==None:
+            eventSummary = ''
+            
+        elif len(name)!=0 and eventDatetime==None:
+            eventSummary = f'{name}'
+        
+        elif len(name)==0 and eventDatetime!=None:
+            raw_timer = eventDatetime - currentTime
+            timer = pandas.to_timedelta(raw_timer).round('1s')
+            eventSummary = f'{timer}'
+            
+        else:
+            raw_timer = eventDatetime - currentTime
+            timer = pandas.to_timedelta(raw_timer).round('1s')
+            eventSummary = f'{name}: {timer}'
+        
+        # Configuring the label.
+        eventLabel.config(text=eventSummary)
+        
+        # Repeating every second.
+        addWindow.after(1000,updateEventSum)
+        
     # Creating window with tkinter.
     addWindow = tk.Tk()
     addWindow.title("Add Event")
     addWindow.geometry("600x220")
     
     # Defining variables.
+    global name
     name = ""
-    eventDatetime = ""
-    eventSummary = ""
+    global eventDatetime
+    eventDatetime = None
     addHours = tk.IntVar()
     addMins = tk.IntVar()
     
@@ -104,7 +151,7 @@ def addWindow():
     calendar = Calendar(addWindow, borderwidth=0)
     
     # Creating label element.
-    eventLabel = tk.Label(addWindow, text=eventSummary)
+    eventLabel = tk.Label(addWindow, text="")
     
     # Creating event name elements.
     eventName = tk.Entry(addWindow, width=19, justify="center")
@@ -151,6 +198,9 @@ def addWindow():
     addWindow.grid_columnconfigure(3, weight=1)
     addWindow.grid_columnconfigure(4, weight=1)
     addWindow.grid_columnconfigure(5, weight=1)
+    
+    # Running update event summary.
+    updateEventSum()
     
     # Lifting window 
     addWindow.lift()
