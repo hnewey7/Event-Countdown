@@ -14,7 +14,7 @@ import datetime
 import os
 
 # Function to display add event window.
-def addWindow():
+def addWindow(events):
     
     # Function to format the spin box.
     def formatSpin(spinboxName):
@@ -40,7 +40,6 @@ def addWindow():
         # Defining global variables.
         global name
         global eventDatetime
-        global events
         
         # Check if all information has been inputted.
         if len(name)==0 or eventDatetime==None:

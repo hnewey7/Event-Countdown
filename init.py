@@ -23,10 +23,10 @@ def init():
         # Read file.
         log = open(logPath,"r")
         events = log.readlines()
-        
+
     else:
         
         # Create log path.
         log = open(logPath,"x")
     
-    return(events, applicationName, geometry)
+    return events, applicationName, geometry
