@@ -11,7 +11,10 @@ from countdownWindow import countdownWindow
 # Main function.
 def main():
     
+    # Initialisation function.
     [events, applicationName, geometry] = init()
+    
+    # Main GUI function.
     countdownWindow(applicationName, geometry)
         
 main()
