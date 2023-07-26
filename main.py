@@ -41,7 +41,7 @@ def init():
         print('Log file created.')
     
     return events, applicationName, geometry, log
-    
+
 # Main function.
 def main():
     
@@ -49,9 +49,11 @@ def main():
     mainWindow = tk.Tk()
     mainWindow.title(applicationName)
     mainWindow.geometry(geometry)
+    print('Creating GUI window...')
     
     # Update events function.
-    #updateEvents()
+    updateEvents(mainWindow)
+    print('Updated events.')
     
     # Lifting window 
     mainWindow.lift()
@@ -65,9 +67,27 @@ def main():
     # Main GUI function.
     #countdownWindow(events, applicationName, geometry)
 
+# Update events function,
+def updateEvents(mainWindow):
+    
+    # Standard elements of GUI.
+    title = tk.Label(mainWindow, text='Event Countdown')
+    add = tk.Button(mainWindow, text='Add')
+    edit = tk.Button(mainWindow, text='Edit')
+    delete = tk.Button(mainWindow, text='Delete')
+    print('Standard elements created.')
+    
+    for index, event in enumerate(events):
+        
+        # Getting event name and time.
+        eventName = events[index].split(' - ')[0]
+        
+        # Creating event elements.
+        eventLabel = tk.Label(mainWindow, text=eventName)
+        eventCountdown = tk.Label(mainWindow)
+        
 def onClose(mainWindow, log):
     
-    # Saving log file.
     log.close()
     print('File saved.')
     
